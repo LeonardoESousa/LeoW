@@ -128,7 +128,7 @@ def watcher(file):
             else:
                 time.sleep(60)
         except:
-            pass
+            time.sleep(3*60)
 
 def pega_energia(file):
     energias = []
@@ -172,7 +172,7 @@ def rodar_omega(atomos,G,base,nproc,mem,omega,gauss,geomlog,op):
             subprocess.call(['ts', gauss, file])  #os.system("tsp g09 "+file)
     for file in files:  
         watcher(file)
-    for file in files:  
+    for file in files:      
         if op == 'opt':
             G, atomos = pega_geom(file[:-4]+".log")
         neutro = pega_energia(file[:-4]+".log")
@@ -264,7 +264,7 @@ try:
             if len(line) == 2:
                 om = format(int(line[0]), '05')
                 omegas.append(om)
-                Js.append(line[1])
+                Js.append(float(line[1]))
 except:
     pass
 
